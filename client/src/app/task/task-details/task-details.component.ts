@@ -123,4 +123,8 @@ export class TaskDetailsComponent extends Unsubscriber implements OnInit {
   public onOpenOsmOrgButtonClicked() {
     this.taskService.openInOsmOrg(this.task, this.projectId);
   }
+
+  public onOpenRapidButtonClicked() {
+    this.taskService.openInRapid(this.task, this.projectId);
+  }
 }

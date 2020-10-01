@@ -108,7 +108,7 @@ export class TaskService {
       // The task-polygon
       'http://localhost:8111/load_data?new_layer=true&layer_name=task-shape&data=' + encodeURIComponent(this.getGeometryAsOsm(task)),
       // Load data for the extent of the task
-      'http://localhost:8111/load_and_zoom?new_layer=true&left=' + e[0] + '&right=' + e[2] + '&top=' + e[3] + '&bottom=' + e[1] + '&changeset_comment=' + encodeURIComponent('#stm #stm-project-' + projectId + ' ')
+      'http://localhost:8111/load_and_zoom?new_layer=true&left=' + e[0] + '&right=' + e[2] + '&top=' + e[3] + '&bottom=' + e[1] + '&changeset_comment=' + encodeURIComponent('#ghr #ghr-project-' + projectId + ' ')
     ])
       .pipe(
         concatMap(url => {
@@ -121,10 +121,20 @@ export class TaskService {
     const e = this.getExtent(task);
     const mapView = this.fitExtentToScreen(e, window.screen.availWidth, window.screen.availHeight);
 
-    const comment = encodeURIComponent('#stm #stm-project-' + projectId + ' ');
-    const hashtags = encodeURIComponent('#stm,#stm-project-' + projectId);
+    const comment = encodeURIComponent('#ghr #ghr-project-' + projectId + ' ');
+    const hashtags = encodeURIComponent('#ghr,#ghr-project-' + projectId);
 
     window.open('https://openstreetmap.org/edit?editor=id#map=' + mapView.zoom + '/' + mapView.centerLat + '/' + mapView.centerLon + '&comment=' + comment + '&hashtags=' + hashtags);
+  }
+
+  public openInRapid(task: Task, projectId: string) {
+    const e = this.getExtent(task);
+    const mapView = this.fitExtentToScreen(e, window.screen.availWidth, window.screen.availHeight);
+
+    const comment = encodeURIComponent('#ghr #ghr-project-' + projectId + ' ');
+    const hashtags = encodeURIComponent('#ghr,#ghr-project-' + projectId);
+
+    window.open('https://mapwithai/edit?rapid#map=' + mapView.zoom + '/' + mapView.centerLat + '/' + mapView.centerLon + '&comment=' + comment + '&hashtags=' + hashtags);
   }
 
   /**
